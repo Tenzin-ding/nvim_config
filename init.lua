@@ -20,17 +20,31 @@ vim.o.splitbelow = false
 vim.o.cursorline = true
 vim.o.scrolloff = 1
 
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', 'd;', '0D')
-vim.keymap.set('n', 'y;', '0Y')
+function mapn(key, command, other)
+    vim.keymap.set('n', key, command, other)
+end
+function mapi(key, command, other)
+    vim.keymap.set('i', key, command, other)
+end
 
-vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move cursor left in insert mode' })
-vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move cursor right in insert mode' })
-vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move cursor down in insert mode' })
-vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move cursor up in insert mode' })
+mapn('<Esc>', '<cmd>nohlsearch<CR>')
+mapn('d;', '0D')
+mapn('y;', '0Y')
+
+mapi('<C-h>', '<Left>', { desc = 'Move cursor left in insert mode' })
+mapi('<C-l>', '<Right>', { desc = 'Move cursor right in insert mode' })
+mapi('<C-j>', '<Down>', { desc = 'Move cursor down in insert mode' })
+mapi('<C-k>', '<Up>', { desc = 'Move cursor up in insert mode' })
+
+-- Not sure about these
+mapi('<M-b>', '<C-Left>')
+mapi('<M-B>', '<C-o>B')
+mapi('<M-w>', '<C-Right>')
+mapi('<M-W>', '<C-o>W')
+
 -- I would rather want these set to ctrl-i and ctrl-m, but the terminal doesn't allow that sadly.
-vim.keymap.set('i', '<C-q>', '<C-o>o', { desc = 'Same as enter, but does not split the line.' })
-vim.keymap.set('i', '<C-b>', '<C-o>O', { desc = 'Same as crtl-m, but goes upwards.' })
+mapi('<M-CR>', '<C-o>o', { desc = 'Same as enter, but does not split the line.' })
+mapi("<M-'>", '<C-o>O', { desc = 'Same as crtl-m, but goes upwards.' })
 
 vim.o.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
