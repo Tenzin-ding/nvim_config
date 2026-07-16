@@ -21,11 +21,16 @@ vim.o.cursorline = true
 vim.o.scrolloff = 1
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', 'd;', '0D')
+vim.keymap.set('n', 'y;', '0Y')
 
 vim.keymap.set('i', '<C-h>', '<Left>', { desc = 'Move cursor left in insert mode' })
 vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move cursor right in insert mode' })
 vim.keymap.set('i', '<C-j>', '<Down>', { desc = 'Move cursor down in insert mode' })
 vim.keymap.set('i', '<C-k>', '<Up>', { desc = 'Move cursor up in insert mode' })
+-- I would rather want these set to ctrl-i and ctrl-m, but the terminal doesn't allow that sadly.
+vim.keymap.set('i', '<C-q>', '<C-o>o', { desc = 'Same as enter, but does not split the line.' })
+vim.keymap.set('i', '<C-b>', '<C-o>O', { desc = 'Same as crtl-m, but goes upwards.' })
 
 vim.o.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
