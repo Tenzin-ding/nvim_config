@@ -26,6 +26,9 @@ end
 function mapi(key, command, other)
     vim.keymap.set('i', key, command, other)
 end
+function mapv(key, command, other)
+    vim.keymap.set('v', key, command, other)
+end
 
 mapn('<Esc>', '<cmd>nohlsearch<CR>')
 mapn('d;', '0D')
@@ -46,11 +49,13 @@ mapi('<M-W>', '<C-o>W')
 mapi('<M-CR>', '<C-o>o', { desc = 'Same as enter, but does not split the line.' })
 mapi("<M-'>", '<C-o>O', { desc = 'Same as crtl-m, but goes upwards.' })
 
+-- mapv('<C-p>', 'pg;g;P')
+
 vim.o.list = true
 vim.opt.listchars = { tab = '→ ', trail = '·', nbsp = '␣' }
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+  callback = function() vim.hl.hl_op() end,
 })
